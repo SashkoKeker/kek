@@ -1,27 +1,19 @@
 var express = require('express');
-
 var path = require('path');
-
 var bodyParser = require('body-parser');
-
 var methodOverride = require('method-override');
 var log = require('./libs/log')(module);
 var config = require('./libs/config');
 var ArticleModel = require('./libs/mongoose').ArticleModel;
 var app = express();
-
 var ArticleModel = require('./libs/mongoose').ArticleModel;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-
-
-
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, "public")));
-
 app.get('/api/articles', function (req, res) {
 	return ArticleModel.find(function (err, articles) {
 		if (!err) {
