@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var log = require('./log')(module);
 var config = require('./config');
 
-mongoose.connect(config.get('mongoose:uri')); 
+mongoose.connect(config.get('mongoose:uri'));
 //mongoose.connect('mongodb://localhost/test1');
 
 var db = mongoose.connection;
@@ -11,17 +11,17 @@ db.on('error', function (err) {
 	log.error('connection error:', err.message);
 });
 
-db.once('open', function callback () {
+db.once('open', function callback() {
 	log.info("Connected to DB!");
 });
 
 var Schema = mongoose.Schema; // Schemas
 var Images = new Schema({
-	kind: 
+	kind:
 	{
 		type: String,
 		enum: ['thumbnail', 'detail'],
-		required: true 
+		required: true
 	},
 	url: { type: String, required: true }
 });
